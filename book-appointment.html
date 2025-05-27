@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - Ultimate Labs</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Anime.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Flatpickr (Date Picker) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Select2 (Enhanced Select) -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- SweetAlert2 (Beautiful Alerts) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Custom Form Styles */
+        .form-input {
+            @apply border-gray-300 rounded-lg shadow-sm transition-all duration-200;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            background-color: #f9fafb;
+        }
+
+        .form-input:focus {
+            @apply border-blue-500 ring-2 ring-blue-200 bg-white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-input:hover:not(:focus) {
+            @apply border-blue-300 bg-white;
+        }
+
+        /* Custom Select2 Styles */
+        .select2-container--classic .select2-selection--single {
+            @apply border-gray-300 rounded-lg shadow-sm bg-gray-50 h-12 flex items-center;
+            padding: 0.75rem 1rem;
+        }
+
+        .select2-container--classic .select2-selection--single:focus,
+        .select2-container--classic.select2-container--open .select2-selection--single {
+            @apply border-blue-500 ring-2 ring-blue-200 bg-white;
+        }
+
+        .select2-container--classic .select2-selection--single:hover {
+            @apply border-blue-300 bg-white;
+        }
+
+        .select2-container--classic .select2-results__option--highlighted[aria-selected] {
+            @apply bg-blue-600;
+        }
+
+        /* Custom Checkbox Styles */
+        .custom-checkbox {
+            @apply h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 transition-all duration-200;
+        }
+
+        .custom-checkbox:hover {
+            @apply border-blue-400;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            @apply inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-r-transparent motion-reduce:animate-[spin_1.5s_linear_infinite];
+        }
+
+        /* Form Section Styles */
+        .form-section {
+            @apply bg-white rounded-xl shadow-lg p-8 transition-all duration-300;
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        .form-section:hover {
+            @apply shadow-xl;
+            transform: translateY(-2px);
+        }
+
+        /* Progress Indicator */
+        .progress-steps {
+            @apply flex justify-between items-center mb-12 relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            @apply absolute top-1/2 left-0 w-full h-1 bg-gray-200 -translate-y-1/2;
+            z-index: 1;
+        }
+
+        .progress-step {
+            @apply relative z-10 flex flex-col items-center;
+        }
+
+        .step-number {
+            @apply w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-semibold mb-2 transition-all duration-300;
+        }
+
+        .step-active .step-number {
+            @apply bg-blue-600 text-white;
+        }
+
+        .step-completed .step-number {
+            @apply bg-green-500 text-white;
+        }
+
+        .step-label {
+            @apply text-sm font-medium text-gray-600;
+        }
+
+        .step-active .step-label {
+            @apply text-blue-600;
+        }
+
+        /* Form Field Focus Styles */
+        .form-field-group {
+            @apply relative;
+        }
+
+        .form-field-group:focus-within label {
+            @apply text-blue-600;
+        }
+
+        /* Required Field Indicator */
+        .required-field::after {
+            content: '*';
+            @apply text-red-500 ml-1;
+        }
+
+        /* Success Message Animation */
+        @keyframes success-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .success-message {
+            animation: success-pulse 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600">Ultimate Labs</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a href="index.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="about.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="services.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                        <a href="contact.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <a href="book-appointment.html" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Book Appointment</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="about.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="services.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Services</a>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                <a href="book-appointment.html" class="bg-blue-600 text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Book Appointment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Appointment Hero Section -->
+    <section class="pt-24 pb-12 md:pt-32 md:pb-20 bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4 animate-fade-in">
+                    Book Your Test
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 animate-fade-in-delay">
+                    Schedule Your Appointment Online
+                </p>
+                <!-- Progress Steps -->
+                <div class="progress-steps max-w-2xl mx-auto">
+                    <div class="progress-step step-active">
+                        <div class="step-number">1</div>
+                        <span class="step-label">Personal Info</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-number">2</div>
+                        <span class="step-label">Test Selection</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-number">3</div>
+                        <span class="step-label">Appointment</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-number">4</div>
+                        <span class="step-label">Confirmation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Form -->
+    <section class="py-16 bg-gradient-to-b from-blue-50 to-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <form id="appointment-form" class="space-y-8">
+                <!-- Personal Information -->
+                <div class="form-section">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="text-blue-600 text-2xl">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900">Personal Information</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="form-field-group">
+                                <label for="fullName" class="block text-sm font-medium text-gray-700 required-field">Full Name</label>
+                                <div class="mt-1 relative">
+                                    <input type="text" id="fullName" name="fullName" required
+                                        class="form-input w-full pl-10"
+                                        placeholder="Enter your full name">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-user text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field-group">
+                                <label for="email" class="block text-sm font-medium text-gray-700 required-field">Email Address</label>
+                                <div class="mt-1 relative">
+                                    <input type="email" id="email" name="email" required
+                                        class="form-input w-full pl-10"
+                                        placeholder="Enter your email">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-envelope text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field-group">
+                                <label for="phone" class="block text-sm font-medium text-gray-700 required-field">Phone Number</label>
+                                <div class="mt-1 relative">
+                                    <input type="tel" id="phone" name="phone" required
+                                        class="form-input w-full pl-10"
+                                        placeholder="Enter your phone number">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-phone text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field-group">
+                                <label for="age" class="block text-sm font-medium text-gray-700 required-field">Age</label>
+                                <div class="mt-1 relative">
+                                    <input type="number" id="age" name="age" required min="0" max="120"
+                                        class="form-input w-full pl-10"
+                                        placeholder="Enter your age">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-birthday-cake text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field-group">
+                                <label for="gender" class="block text-sm font-medium text-gray-700 required-field">Gender</label>
+                                <div class="mt-1 relative">
+                                    <select id="gender" name="gender" required class="form-input w-full pl-10">
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-venus-mars text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Selection -->
+                <div class="form-section">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="text-blue-600 text-2xl">
+                                <i class="fas fa-vial"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900">Test Selection</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="form-field-group">
+                                <label for="testCategory" class="block text-sm font-medium text-gray-700 required-field">Test Category</label>
+                                <div class="mt-1 relative">
+                                    <select id="testCategory" name="testCategory" required class="form-input w-full pl-10">
+                                        <option value="">Select Category</option>
+                                        <option value="blood">Blood Tests</option>
+                                        <option value="pathology">Pathology Tests</option>
+                                        <option value="cardiac">Cardiac Tests</option>
+                                        <option value="hormone">Hormone Tests</option>
+                                        <option value="microbiology">Microbiology Tests</option>
+                                        <option value="genetic">Genetic Tests</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-flask text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field-group">
+                                <label for="testType" class="block text-sm font-medium text-gray-700 required-field">Specific Test</label>
+                                <div class="mt-1 relative">
+                                    <select id="testType" name="testType" required class="form-input w-full pl-10">
+                                        <option value="">Select Test</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-microscope text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appointment Details -->
+                <div class="form-section">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="text-blue-600 text-2xl">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900">Appointment Details</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="form-field-group">
+                                <label for="preferredDate" class="block text-sm font-medium text-gray-700 required-field">Preferred Date</label>
+                                <div class="mt-1 relative">
+                                    <input type="text" id="preferredDate" name="preferredDate" required
+                                        class="form-input w-full pl-10"
+                                        placeholder="Select date">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-calendar text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field-group">
+                                <label for="preferredTime" class="block text-sm font-medium text-gray-700 required-field">Preferred Time</label>
+                                <div class="mt-1 relative">
+                                    <select id="preferredTime" name="preferredTime" required class="form-input w-full pl-10">
+                                        <option value="">Select Time Slot</option>
+                                        <option value="morning">Morning (8:00 AM - 12:00 PM)</option>
+                                        <option value="afternoon">Afternoon (12:00 PM - 4:00 PM)</option>
+                                        <option value="evening">Evening (4:00 PM - 8:00 PM)</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-clock text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field-group">
+                                <label for="sampleCollection" class="block text-sm font-medium text-gray-700 required-field">Sample Collection</label>
+                                <div class="mt-1 relative">
+                                    <select id="sampleCollection" name="sampleCollection" required class="form-input w-full pl-10">
+                                        <option value="">Select Collection Method</option>
+                                        <option value="lab">Visit Lab</option>
+                                        <option value="home">Home Collection</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-home text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="addressField" class="form-field-group hidden">
+                                <label for="address" class="block text-sm font-medium text-gray-700 required-field">Address for Home Collection</label>
+                                <div class="mt-1 relative">
+                                    <textarea id="address" name="address" rows="3"
+                                        class="form-input w-full pl-10"
+                                        placeholder="Enter your complete address"></textarea>
+                                    <div class="absolute top-3 left-0 pl-3 flex items-start pointer-events-none">
+                                        <i class="fas fa-map-marker-alt text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Notes -->
+                <div class="form-section">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="text-blue-600 text-2xl">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900">Additional Information</h2>
+                        </div>
+                        <div class="form-field-group">
+                            <label for="notes" class="block text-sm font-medium text-gray-700">Additional Notes</label>
+                            <div class="mt-1 relative">
+                                <textarea id="notes" name="notes" rows="3"
+                                    class="form-input w-full pl-10"
+                                    placeholder="Any specific instructions or requirements..."></textarea>
+                                <div class="absolute top-3 left-0 pl-3 flex items-start pointer-events-none">
+                                    <i class="fas fa-sticky-note text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="form-section bg-blue-50 border-blue-100">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex items-center h-5">
+                            <input id="terms" name="terms" type="checkbox" required
+                                class="custom-checkbox">
+                        </div>
+                        <div class="text-sm">
+                            <label for="terms" class="font-medium text-gray-700 required-field">Terms and Conditions</label>
+                            <p class="text-gray-500 mt-1">By checking this box, you agree to our terms of service and privacy policy. We respect your privacy and will never share your information with third parties.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-center">
+                    <button type="submit"
+                        class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-lg hover:shadow-xl">
+                        <span class="flex items-center space-x-2">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Book Appointment</span>
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Why Book Online -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Why Book Online?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-white rounded-lg shadow-lg animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Save Time</h3>
+                    <p class="text-gray-600">Book your appointment in advance and avoid waiting in queues</p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-lg shadow-lg animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Special Offers</h3>
+                    <p class="text-gray-600">Get exclusive discounts and offers when booking online</p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-lg shadow-lg animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Flexible Scheduling</h3>
+                    <p class="text-gray-600">Choose your preferred date and time for the test</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Ultimate Labs</h3>
+                    <p class="text-gray-400">Your trusted partner in medical diagnostics, providing accurate and reliable test results.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i> +91 1234567890</li>
+                        <li><i class="fas fa-envelope mr-2"></i> info@ultimatelabs.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> 123 Medical Street, City, State</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Ultimate Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize Flatpickr for date picker
+        flatpickr("#preferredDate", {
+            minDate: "today",
+            dateFormat: "Y-m-d",
+            disableMobile: "true",
+            onChange: function(selectedDates, dateStr) {
+                const input = document.getElementById('preferredDate');
+                if (dateStr) {
+                    input.classList.add('border-green-500', 'ring-green-200');
+                }
+            }
+        });
+
+        // Initialize Select2 for enhanced select boxes
+        $(document).ready(function() {
+            $('.select2').select2({
+                theme: 'classic',
+                width: '100%',
+                dropdownParent: $(this).parent()
+            }).on('select2:open', function() {
+                $(this).parent().find('.select2-container--classic .select2-selection--single').addClass('ring-2 ring-blue-200');
+            }).on('select2:close', function() {
+                $(this).parent().find('.select2-container--classic .select2-selection--single').removeClass('ring-2 ring-blue-200');
+            });
+        });
+
+        // Test category and type mapping
+        const testTypes = {
+            blood: [
+                'Complete Blood Count (CBC)',
+                'Lipid Profile',
+                'Blood Glucose Tests',
+                'Liver Function Tests',
+                'Kidney Function Tests'
+            ],
+            pathology: [
+                'Biopsy Analysis',
+                'Cytology Tests',
+                'Histopathology',
+                'Immunohistochemistry',
+                'Molecular Pathology'
+            ],
+            cardiac: [
+                'ECG',
+                'Cardiac Enzymes',
+                'Lipid Profile',
+                'Troponin Test',
+                'BNP Test'
+            ],
+            hormone: [
+                'Thyroid Profile',
+                'Sex Hormones',
+                'Growth Hormone',
+                'Cortisol Test',
+                'Insulin Test'
+            ],
+            microbiology: [
+                'Culture & Sensitivity',
+                'Urine Culture',
+                'Blood Culture',
+                'Stool Analysis',
+                'Antibiotic Sensitivity'
+            ],
+            genetic: [
+                'DNA Analysis',
+                'Genetic Screening',
+                'Carrier Testing',
+                'Prenatal Testing',
+                'Pharmacogenetic Testing'
+            ]
+        };
+
+        // Update test types based on category selection
+        $('#testCategory').on('change', function() {
+            const testTypeSelect = $('#testType');
+            const selectedCategory = $(this).val();
+            
+            // Clear existing options
+            testTypeSelect.empty().append('<option value="">Select Test</option>');
+            
+            // Add new options based on category
+            if (selectedCategory && testTypes[selectedCategory]) {
+                testTypes[selectedCategory].forEach(test => {
+                    testTypeSelect.append(new Option(test, test.toLowerCase().replace(/\s+/g, '-')));
+                });
+            }
+            
+            // Trigger Select2 update
+            testTypeSelect.trigger('change');
+        });
+
+        // Show/hide address field based on sample collection method
+        $('#sampleCollection').on('change', function() {
+            const addressField = $('#addressField');
+            const addressInput = $('#address');
+            
+            if ($(this).val() === 'home') {
+                addressField.removeClass('hidden');
+                addressInput.prop('required', true);
+            } else {
+                addressField.addClass('hidden');
+                addressInput.prop('required', false);
+            }
+        });
+
+        // Update progress steps
+        function updateProgressSteps(currentStep) {
+            const steps = document.querySelectorAll('.progress-step');
+            steps.forEach((step, index) => {
+                if (index < currentStep) {
+                    step.classList.add('step-completed');
+                    step.classList.remove('step-active');
+                } else if (index === currentStep) {
+                    step.classList.add('step-active');
+                    step.classList.remove('step-completed');
+                } else {
+                    step.classList.remove('step-active', 'step-completed');
+                }
+            });
+        }
+
+        // Initialize form with first step
+        updateProgressSteps(0);
+
+        // Update progress on form section focus
+        document.querySelectorAll('.form-section').forEach((section, index) => {
+            section.addEventListener('focusin', () => {
+                updateProgressSteps(index);
+            });
+        });
+
+        // Enhanced form validation with visual feedback
+        const formInputs = document.querySelectorAll('.form-input, select');
+        formInputs.forEach(input => {
+            input.addEventListener('invalid', (e) => {
+                e.preventDefault();
+                input.classList.add('border-red-500', 'ring-red-200');
+            });
+
+            input.addEventListener('input', () => {
+                if (input.validity.valid) {
+                    input.classList.remove('border-red-500', 'ring-red-200');
+                    input.classList.add('border-green-500', 'ring-green-200');
+                }
+            });
+        });
+
+        // Custom success message styling
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        // Update form submission success message
+        $('#appointment-form').on('submit', function(e) {
+            e.preventDefault();
+            
+            if (!this.checkValidity()) {
+                e.stopPropagation();
+                $(this).addClass('was-validated');
+                return;
+            }
+
+            const submitButton = $(this).find('button[type="submit"]');
+            const originalButtonText = submitButton.html();
+            submitButton.html('<div class="loading-spinner"></div>').prop('disabled', true);
+            
+            setTimeout(() => {
+                submitButton.html(originalButtonText).prop('disabled', false);
+                
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Appointment booked successfully!'
+                });
+
+                // Show detailed success message
+                Swal.fire({
+                    title: 'Appointment Confirmed!',
+                    html: `
+                        <div class="success-message">
+                            <div class="text-green-500 text-5xl mb-4">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Your appointment has been successfully booked.</p>
+                            <div class="bg-blue-50 p-4 rounded-lg text-left">
+                                <p class="text-sm text-gray-600">We will send you a confirmation email with all the details.</p>
+                                <p class="text-sm text-gray-600 mt-2">Please keep your appointment details handy.</p>
+                            </div>
+                        </div>
+                    `,
+                    confirmButtonText: 'Done',
+                    confirmButtonColor: '#3B82F6',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.reset();
+                        $('#addressField').addClass('hidden');
+                        $('#testCategory, #testType, #gender, #preferredTime, #sampleCollection').val('').trigger('change');
+                        updateProgressSteps(0);
+                    }
+                });
+            }, 1500);
+        });
+
+        // Phone number validation
+        $('#phone').on('input', function() {
+            this.value = this.value.replace(/[^0-9+]/g, '');
+        });
+
+        // Age validation
+        $('#age').on('input', function() {
+            const value = parseInt(this.value);
+            if (value < 0) this.value = 0;
+            if (value > 120) this.value = 120;
+        });
+    </script>
+</body>
+</html> 

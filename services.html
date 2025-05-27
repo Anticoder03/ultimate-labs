@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Ultimate Labs</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Anime.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600">Ultimate Labs</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a href="index.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="about.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="services.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                        <a href="contact.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <a href="book-appointment.html" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Book Appointment</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="about.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="services.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Services</a>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                <a href="book-appointment.html" class="bg-blue-600 text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Book Appointment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Services Hero Section -->
+    <section class="pt-24 pb-12 md:pt-32 md:pb-20 bg-gradient-to-r from-blue-50 to-blue-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4 animate-fade-in">
+                    Our Services
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 animate-fade-in-delay">
+                    Comprehensive Diagnostic Solutions for Better Health
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Services -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blood Tests -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300 animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Blood Tests</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Complete Blood Count (CBC)</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Lipid Profile</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Blood Glucose Tests</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Liver Function Tests</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Kidney Function Tests</li>
+                    </ul>
+                    <a href="book-appointment.html" class="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                        Book Now
+                    </a>
+                </div>
+
+                <!-- Pathology Tests -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300 animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Pathology Tests</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Biopsy Analysis</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Cytology Tests</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Histopathology</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Immunohistochemistry</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Molecular Pathology</li>
+                    </ul>
+                    <a href="book-appointment.html" class="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                        Book Now
+                    </a>
+                </div>
+
+                <!-- Cardiac Tests -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300 animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Cardiac Tests</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> ECG</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Cardiac Enzymes</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Lipid Profile</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Troponin Test</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> BNP Test</li>
+                    </ul>
+                    <a href="book-appointment.html" class="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                        Book Now
+                    </a>
+                </div>
+
+                <!-- Hormone Tests -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300 animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Hormone Tests</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Thyroid Profile</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Sex Hormones</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Growth Hormone</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Cortisol Test</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Insulin Test</li>
+                    </ul>
+                    <a href="book-appointment.html" class="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                        Book Now
+                    </a>
+                </div>
+
+                <!-- Microbiology Tests -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300 animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-bacteria"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Microbiology Tests</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Culture & Sensitivity</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Urine Culture</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Blood Culture</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Stool Analysis</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Antibiotic Sensitivity</li>
+                    </ul>
+                    <a href="book-appointment.html" class="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                        Book Now
+                    </a>
+                </div>
+
+                <!-- Genetic Tests -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300 animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Genetic Tests</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> DNA Analysis</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Genetic Screening</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Carrier Testing</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Prenatal Testing</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Pharmacogenetic Testing</li>
+                    </ul>
+                    <a href="book-appointment.html" class="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Our Services -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Why Choose Our Services?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-white rounded-lg shadow-lg animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Quick Turnaround</h3>
+                    <p class="text-gray-600">Most test results available within 24 hours</p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-lg shadow-lg animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Home Collection</h3>
+                    <p class="text-gray-600">Free sample collection from your doorstep</p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-lg shadow-lg animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Online Reports</h3>
+                    <p class="text-gray-600">Access your reports anytime, anywhere</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Appointment CTA -->
+    <section class="py-16 bg-blue-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-4">Ready to Book Your Test?</h2>
+            <p class="text-xl mb-8">Schedule your appointment now and get 10% off on your first test</p>
+            <a href="book-appointment.html" class="bg-white text-blue-600 px-8 py-3 rounded-full text-lg font-medium hover:bg-gray-100 transition duration-300">
+                Book Appointment
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Ultimate Labs</h3>
+                    <p class="text-gray-400">Your trusted partner in medical diagnostics, providing accurate and reliable test results.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i> +91 1234567890</li>
+                        <li><i class="fas fa-envelope mr-2"></i> info@ultimatelabs.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> 123 Medical Street, City, State</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Ultimate Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html> 

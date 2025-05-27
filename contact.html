@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Ultimate Labs</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Anime.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Custom Form Styles */
+        .form-input {
+            @apply border-gray-300 rounded-lg shadow-sm transition-all duration-200;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            background-color: #f9fafb;
+        }
+
+        .form-input:focus {
+            @apply border-blue-500 ring-2 ring-blue-200 bg-white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-input:hover:not(:focus) {
+            @apply border-blue-300 bg-white;
+        }
+
+        /* Form Section Styles */
+        .form-section {
+            @apply bg-white rounded-xl shadow-lg p-8 transition-all duration-300;
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        .form-section:hover {
+            @apply shadow-xl;
+            transform: translateY(-2px);
+        }
+
+        /* Form Field Focus Styles */
+        .form-field-group {
+            @apply relative;
+        }
+
+        .form-field-group:focus-within label {
+            @apply text-blue-600;
+        }
+
+        /* Required Field Indicator */
+        .required-field::after {
+            content: '*';
+            @apply text-red-500 ml-1;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            @apply inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-r-transparent motion-reduce:animate-[spin_1.5s_linear_infinite];
+        }
+
+        /* Success Message Animation */
+        @keyframes success-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .success-message {
+            animation: success-pulse 0.5s ease-in-out;
+        }
+
+        /* Contact Info Card Styles */
+        .contact-card {
+            @apply bg-white rounded-xl shadow-lg p-6 transition-all duration-300;
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        .contact-card:hover {
+            @apply shadow-xl;
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            @apply w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl mb-4;
+        }
+
+        /* Map Container Styles */
+        .map-container {
+            @apply rounded-xl shadow-lg overflow-hidden transition-all duration-300;
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        .map-container:hover {
+            @apply shadow-xl;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600">Ultimate Labs</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a href="index.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="about.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="services.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                        <a href="contact.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <a href="book-appointment.html" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Book Appointment</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="about.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="services.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Services</a>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                <a href="book-appointment.html" class="bg-blue-600 text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Book Appointment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Hero Section -->
+    <section class="pt-24 pb-12 md:pt-32 md:pb-20 bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4 animate-fade-in">
+                    Contact Us
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 animate-fade-in-delay">
+                    Get in Touch with Our Team
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="py-16 bg-gradient-to-b from-blue-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Phone Numbers</h3>
+                    <div class="space-y-2 text-gray-600">
+                        <p><i class="fas fa-phone-alt mr-2 text-blue-600"></i> +91 1234567890</p>
+                        <p><i class="fas fa-phone-alt mr-2 text-blue-600"></i> +91 9876543210</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Email Address</h3>
+                    <div class="space-y-2 text-gray-600">
+                        <p><i class="fas fa-envelope mr-2 text-blue-600"></i> info@ultimatelabs.com</p>
+                        <p><i class="fas fa-envelope mr-2 text-blue-600"></i> support@ultimatelabs.com</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Address</h3>
+                    <p class="text-gray-600">
+                        <i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>
+                        123 Medical Street, Healthcare District,<br>
+                        City, State - 123456,<br>
+                        India
+                    </p>
+                </div>
+            </div>
+
+            <!-- Contact Form and Map -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Contact Form -->
+                <div class="form-section">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="text-blue-600 text-2xl">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900">Send Us a Message</h2>
+                    </div>
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="form-field-group">
+                                <label for="name" class="block text-sm font-medium text-gray-700 required-field">Full Name</label>
+                                <div class="mt-1 relative">
+                                    <input type="text" id="name" name="name" required
+                                        class="form-input w-full pl-10"
+                                        placeholder="Enter your full name">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-user text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field-group">
+                                <label for="email" class="block text-sm font-medium text-gray-700 required-field">Email Address</label>
+                                <div class="mt-1 relative">
+                                    <input type="email" id="email" name="email" required
+                                        class="form-input w-full pl-10"
+                                        placeholder="Enter your email">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-envelope text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field-group">
+                                <label for="phone" class="block text-sm font-medium text-gray-700 required-field">Phone Number</label>
+                                <div class="mt-1 relative">
+                                    <input type="tel" id="phone" name="phone" required
+                                        class="form-input w-full pl-10"
+                                        placeholder="Enter your phone number">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-phone text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field-group">
+                                <label for="subject" class="block text-sm font-medium text-gray-700 required-field">Subject</label>
+                                <div class="mt-1 relative">
+                                    <input type="text" id="subject" name="subject" required
+                                        class="form-input w-full pl-10"
+                                        placeholder="Enter message subject">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-heading text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-field-group">
+                            <label for="message" class="block text-sm font-medium text-gray-700 required-field">Message</label>
+                            <div class="mt-1 relative">
+                                <textarea id="message" name="message" rows="5" required
+                                    class="form-input w-full pl-10"
+                                    placeholder="Enter your message..."></textarea>
+                                <div class="absolute top-3 left-0 pl-3 flex items-start pointer-events-none">
+                                    <i class="fas fa-comment-alt text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-center">
+                            <button type="submit"
+                                class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-lg hover:shadow-xl">
+                                <span class="flex items-center space-x-2">
+                                    <i class="fas fa-paper-plane"></i>
+                                    <span>Send Message</span>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Map and Working Hours -->
+                <div class="space-y-8">
+                    <!-- Map -->
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.59891910558!2d77.5945627!3d12.9715987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzE3LjgiTiA3N8KwMzUnNDAuNCJF!5e0!3m2!1sen!2sin!4v1635000000000!5m2!1sen!2sin"
+                            width="100%"
+                            height="300"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy">
+                        </iframe>
+                    </div>
+
+                    <!-- Working Hours -->
+                    <div class="form-section">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="text-blue-600 text-2xl">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900">Working Hours</h2>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-gray-600">Monday - Friday</span>
+                                <span class="font-medium text-gray-900">8:00 AM - 8:00 PM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-gray-600">Saturday</span>
+                                <span class="font-medium text-gray-900">9:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-600">Sunday</span>
+                                <span class="font-medium text-gray-900">10:00 AM - 4:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Ultimate Labs</h3>
+                    <p class="text-gray-400">Your trusted partner in medical diagnostics, providing accurate and reliable test results.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i> +91 1234567890</li>
+                        <li><i class="fas fa-envelope mr-2"></i> info@ultimatelabs.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> 123 Medical Street, City, State</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Ultimate Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+        // Custom success message styling
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        // Enhanced form validation with visual feedback
+        const formInputs = document.querySelectorAll('.form-input');
+        formInputs.forEach(input => {
+            input.addEventListener('invalid', (e) => {
+                e.preventDefault();
+                input.classList.add('border-red-500', 'ring-red-200');
+            });
+
+            input.addEventListener('input', () => {
+                if (input.validity.valid) {
+                    input.classList.remove('border-red-500', 'ring-red-200');
+                    input.classList.add('border-green-500', 'ring-green-200');
+                }
+            });
+        });
+
+        // Phone number validation
+        $('#phone').on('input', function() {
+            this.value = this.value.replace(/[^0-9+]/g, '');
+        });
+
+        // Contact form submission
+        $('#contact-form').on('submit', function(e) {
+            e.preventDefault();
+            
+            if (!this.checkValidity()) {
+                e.stopPropagation();
+                $(this).addClass('was-validated');
+                return;
+            }
+
+            const submitButton = $(this).find('button[type="submit"]');
+            const originalButtonText = submitButton.html();
+            submitButton.html('<div class="loading-spinner"></div>').prop('disabled', true);
+            
+            setTimeout(() => {
+                submitButton.html(originalButtonText).prop('disabled', false);
+                
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Message sent successfully!'
+                });
+
+                // Show detailed success message
+                Swal.fire({
+                    title: 'Message Sent!',
+                    html: `
+                        <div class="success-message">
+                            <div class="text-green-500 text-5xl mb-4">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Thank you for contacting us.</p>
+                            <div class="bg-blue-50 p-4 rounded-lg text-left">
+                                <p class="text-sm text-gray-600">We will get back to you as soon as possible.</p>
+                                <p class="text-sm text-gray-600 mt-2">For urgent matters, please call us directly.</p>
+                            </div>
+                        </div>
+                    `,
+                    confirmButtonText: 'Done',
+                    confirmButtonColor: '#3B82F6',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.reset();
+                        formInputs.forEach(input => {
+                            input.classList.remove('border-green-500', 'ring-green-200');
+                        });
+                    }
+                });
+            }, 1500);
+        });
+    </script>
+</body>
+</html> 

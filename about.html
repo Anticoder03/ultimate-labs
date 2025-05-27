@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Ultimate Labs</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Anime.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600">Ultimate Labs</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a href="index.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="about.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="services.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                        <a href="contact.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <a href="book-appointment.html" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Book Appointment</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="about.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="services.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Services</a>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                <a href="book-appointment.html" class="bg-blue-600 text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">Book Appointment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Hero Section -->
+    <section class="pt-24 pb-12 md:pt-32 md:pb-20 bg-gradient-to-r from-blue-50 to-blue-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4 animate-fade-in">
+                    About Ultimate Labs
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 animate-fade-in-delay">
+                    Excellence in Medical Diagnostics Since 2010
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
+                    <p class="text-gray-600 mb-4">
+                        Founded in 2010, Ultimate Labs has been at the forefront of medical diagnostics in India. 
+                        What started as a small laboratory has grown into one of the most trusted diagnostic centers 
+                        in the country, serving thousands of patients with accuracy and care.
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        Our commitment to excellence and innovation has made us a preferred choice for healthcare 
+                        providers and patients alike. We continuously invest in cutting-edge technology and training 
+                        to ensure the highest standards of diagnostic services.
+                    </p>
+                    <p class="text-gray-600">
+                        Today, we are proud to be NABL accredited and recognized for our contribution to healthcare 
+                        through accurate and reliable diagnostic services.
+                    </p>
+                </div>
+                <div class="relative animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                         alt="Laboratory" 
+                         class="rounded-lg shadow-xl w-full h-auto">
+                    <div class="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-lg shadow-lg">
+                        <p class="text-4xl font-bold">14+</p>
+                        <p class="text-sm">Years of Excellence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="bg-white p-8 rounded-lg shadow-lg animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
+                    <p class="text-gray-600">
+                        To provide accurate, reliable, and timely diagnostic services that contribute to better 
+                        healthcare outcomes while maintaining the highest standards of quality and patient care.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg animate-on-scroll">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
+                    <p class="text-gray-600">
+                        To be the most trusted diagnostic laboratory in India, known for our commitment to 
+                        excellence, innovation, and patient-centric approach in healthcare diagnostics.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Our Leadership Team</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Team Member 1 -->
+                <div class="text-center animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" 
+                         alt="Dr. Rajesh Kumar" 
+                         class="w-48 h-48 rounded-full mx-auto mb-4 object-cover">
+                    <h3 class="text-xl font-semibold mb-2">Dr. Rina Kumar</h3>
+                    <p class="text-blue-600 mb-2">Founder & CEO</p>
+                    <p class="text-gray-600">MD, Pathology with 20+ years of experience</p>
+                </div>
+                <!-- Team Member 2 -->
+                <div class="text-center animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" 
+                         alt="Dr. Priya Sharma" 
+                         class="w-48 h-48 rounded-full mx-auto mb-4 object-cover">
+                    <h3 class="text-xl font-semibold mb-2">Dr. Priya Sharma</h3>
+                    <p class="text-blue-600 mb-2">Medical Director</p>
+                    <p class="text-gray-600">MD, Biochemistry with 15+ years of experience</p>
+                </div>
+                <!-- Team Member 3 -->
+                <div class="text-center animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" 
+                         alt="Dr. Amit Patel" 
+                         class="w-48 h-48 rounded-full mx-auto mb-4 object-cover">
+                    <h3 class="text-xl font-semibold mb-2">Dr. Amit Patel</h3>
+                    <p class="text-blue-600 mb-2">Technical Director</p>
+                    <p class="text-gray-600">PhD in Clinical Laboratory Sciences</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Our Certifications</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+                <img src="https://upload.wikimedia.org/wikipedia/en/d/d4/NABL_Official_LOGO_Registered.png" 
+                     alt="NABL Accreditation" 
+                     class="h-20 object-contain animate-on-scroll">
+                <img src="https://media.istockphoto.com/id/942287864/vector/iso-9001-2015-label-certification-new-version.jpg?s=612x612&w=0&k=20&c=BNxlzWbGc3v4GbNRSwqPrSpXQmabbjVLpxPXGMhvOaQ=" 
+                     alt="ISO 9001:2015" 
+                     class="h-20 object-contain animate-on-scroll">
+                <img src="https://sincal.org/wp-content/uploads/2024/01/Norma-ISO-15189-contribuye-a-mejorar-los-servicios-de-salud.png" 
+                     alt="ISO 15189" 
+                     class="h-20 object-contain animate-on-scroll">
+                <img src="https://media.istockphoto.com/id/1409494939/vector/iso-14001-flat-label-with-globe-and-plant.jpg?s=612x612&w=0&k=20&c=5BLvHRLA-bF1Kpbd2KfFAPi5xGfdw-Xhf20gcL-VSzs=" 
+                     alt="ISO 14001" 
+                     class="h-20 object-contain animate-on-scroll">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Ultimate Labs</h3>
+                    <p class="text-gray-400">Your trusted partner in medical diagnostics, providing accurate and reliable test results.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i> +91 1234567890</li>
+                        <li><i class="fas fa-envelope mr-2"></i> info@ultimatelabs.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> 123 Medical Street, City, State</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Ultimate Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html> 
