@@ -64,12 +64,12 @@ A modern, responsive website for Ultimate Labs, a medical diagnostic laboratory.
 
 1. Clone the repository:
    ```bash
-   git clone [repository-url]
+   git clone ultimate-labs
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd ultimate-labs-website
+   cd ultimate-labs
    ```
 
 3. Open `index.html` in your web browser to view the website.
@@ -85,7 +85,7 @@ A modern, responsive website for Ultimate Labs, a medical diagnostic laboratory.
 ## Project Structure
 
 ```
-ultimate-labs-website/
+ultimate-labs/
 ├── index.html
 ├── about.html
 ├── services.html
@@ -119,6 +119,6 @@ This project is proprietary and confidential. All rights reserved. See the [LICE
 ## Contact
 
 For any inquiries, please contact:
-- Email: info@ultimatelabs.com
+- Email: ap5381545@gmail.com
 - Phone: +91 1234567890
 - Address: 123 Medical Street, Healthcare District, City, State - 123456, India 
